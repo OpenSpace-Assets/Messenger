@@ -1,0 +1,9 @@
+return {
+    FileRequest = {
+        { Identifier = "messenger_models", Destination = "models", Version = 1 },
+        { Identifier = "messenger_textures", Destination = "textures", Version = 1 }
+    },
+    TorrentFiles = {
+        { File = "OsirisRexKernels.torrent", Destination = "${SPICE}" },
+    }
+}

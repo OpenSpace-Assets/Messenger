@@ -1,0 +1,70 @@
+function preInitialization()
+    --[[
+    The scripts in this function are executed after the scene is loaded but before the
+    scene elements have been initialized, thus they should be used to set the time at
+    which the scene should start and other settings that might determine initialization
+    critical objects.
+    ]]--
+
+    openspace.spice.loadKernel("${SPICE}/naif0011.tls")
+    openspace.spice.loadKernel("${SPICE}/pck00010.tpc")
+
+    -- Usual start
+    openspace.time.setTime("2011-05-13T00:05:18.101")
+
+    -- Philae release
+    -- openspace.time.setTime("2014-11-12T08:00:00.000")
+
+    -- Shadow flyby
+    -- openspace.time.setTime("2015-02-14T12:00:00.000")
+
+
+    -- openspace.time.setTime("2015-07-29T06:02:10.000")
+    -- openspace.time.setTime("2014 AUG 21 18:00:00")
+    -- openspace.time.setTime("2015 SEP 10 19:39:00")
+    dofile(openspace.absPath('${SCRIPTS}/bind_keys_messenger.lua'))
+end
+
+function postInitialization()
+    --[[
+    The scripts in this function are executed after all objects in the scene have been
+    created and initialized, but before the first render call. This is the place to set
+    graphical settings for the renderables.
+    ]]--
+    openspace.printInfo("Setting default values")
+    openspace.setPropertyValue("Sun.renderable.enabled", true)
+    openspace.setPropertyValue("SunMarker.renderable.enabled",false)
+    openspace.setPropertyValue("EarthMarker.renderable.enabled", true)
+
+    openspace.setPropertyValue("MilkyWay.renderable.transparency", 0.55)
+    openspace.setPropertyValue("MilkyWay.renderable.segments", 50)
+
+    openspace.setPropertyValue('67P.renderable.performShading', false);
+
+    openspace.printInfo("Done setting default values")
+end
+
+return {
+    ScenePath = ".",
+    CommonFolder = "common",
+    Camera = {
+        Focus = "Mercury",
+        Position = {526781518487.171326, 257168309890.072144, -1381125204152.817383},
+        Rotation = {-0.106166, 0.981574, -0.084545, 0.134513},
+    },
+    Modules = {
+        "sun",
+        "messenger/mercury",
+        "venus",
+        "earth",
+        "mars",
+        "jupiter/jupiter",
+        "saturn",
+        "uranus",
+        "neptune",
+        "stars",
+        "milkyway",
+        "messenger/messenger",
+
+    }
+}
